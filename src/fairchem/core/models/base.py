@@ -252,7 +252,8 @@ class HydraModel(nn.Module, GraphModelMixin):
         starting_model = None
         if finetune_config is not None:
             starting_model: HydraModel = load_model_and_weights_from_checkpoint(
-                finetune_config["starting_checkpoint"]
+                finetune_config["starting_checkpoint"],
+                finetune_config.get("overrides", None),
             )
             logging.info(
                 f"Found and loaded fine-tuning checkpoint: {finetune_config['starting_checkpoint']} (Note we are NOT loading the training state from this checkpoint, only parts of the model and weights)"
